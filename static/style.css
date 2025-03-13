@@ -1,0 +1,121 @@
+/* 1. Body Styling */
+body {
+    background-color: #f0f0f0;  /* Background color halaman */
+    font-family: 'Roboto', sans-serif;  /* Font untuk seluruh halaman */
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Container - Tempat menampung semua elemen */
+.container {
+    display: flex;
+    justify-content: center;  /* Menyusun elemen secara horisontal */
+    align-items: center;  /* Menyusun elemen secara vertikal */
+    height: 100vh;  /* Mengatur tinggi container menjadi 100% dari tinggi viewport */
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+}
+
+/* 3. Form Container - Box untuk form */
+.form-container {
+    background-color: #ffffff;  /* Warna latar belakang form */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);  /* Bayangan di sekitar box */
+    width: 100%;
+    max-width: 600px;
+    margin: 10px;
+    height: 80%;  /* Menyesuaikan tinggi form */
+}
+
+/* 4. Title Styling */
+h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #495057;  /* Warna judul */
+    text-align: center;
+}
+
+/* 5. Input Label Styling */
+.form-label {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* 6. Input Field Styling */
+.form-control {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* 7. Focused Input Styling */
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+/* 8. Button Styling - Submit Button */
+.btn-primary {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px;
+    background: linear-gradient(45deg, #007bff, #00c6ff);  /* Gradien warna */
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 9. Button Hover Styling */
+.btn-primary:hover {
+    background: linear-gradient(45deg, #0056b3, #00a3c6);  /* Warna berubah saat hover */
+}
+
+/* 10. Status Container Styling - Box untuk status email */
+.status-container {
+    background-color: #ffffff;  /* Sama dengan background form */
+    padding: 30px;
+    border-radius: 15px;  /* Sama dengan form-container */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);  /* Sama dengan form-container */
+    width: 100%;
+    max-width: 600px;
+    margin: 10px;
+    height: 80%;  /* Sama dengan form-container */
+}
+
+/* 11. List Group Styling - Styling untuk daftar status email */
+.list-group-item {
+    font-size: 0.95rem;
+    color: #495057;
+}
+
+/* 12. Button + untuk Menambah CC */
+#addCCButton {
+    margin-left: 10px;
+}
+
+/* 13. Pesan Error Styling */
+.text-danger {
+    font-size: 0.9rem;
+    color: #d9534f;  /* Warna merah untuk pesan error */
+}
+
+/* 14. Optional Styling for CC Input */
+/* Membatasi tinggi dan menambahkan scroll pada container CC */
+#ccContainer {
+    max-height: 250px; /* Tentukan tinggi maksimal container CC */
+    overflow-y: auto;  /* Menambahkan scroll vertikal jika jumlah input melebihi max-height */
+    margin-bottom: 10px;
+}
+
+/* Menjaga jarak antar input CC */
+.input-group {
+    margin-bottom: 10px;
+}

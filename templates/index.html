@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Send Mail</title>
+    <!-- Link ke Bootstrap CSS -->
+    <link href="/static/style.css" rel="stylesheet">  <!-- Link ke file CSS -->
+</head>
+<body>
+    <div class="container">
+        <!-- Form Container -->
+        <div class="form-container">
+            <h1 class="text-center mb-4">Form Pengaturan Email</h1>
+            <!-- Form untuk pengaturan email -->
+            <form method="POST" id="emailForm">
+                <!-- Email Pengirim -->
+                <div class="mb-3">
+                    <label for="sender" class="form-label">Email Pengirim:</label>
+                    <input type="email" id="sender" name="sender" class="form-control" placeholder="Email Pengirim" required>
+                    <div id="senderError" class="text-danger" style="display:none;">Format email pengirim tidak valid.</div>
+                </div>
+
+                <!-- App Password -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">App Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="App Password" required>
+                    <div id="passwordError" class="text-danger" style="display:none;">Password aplikasi harus terdiri dari 16 karakter tanpa spasi dan hanya alfanumerik.</div>
+                </div>
+
+                <!-- Email Penerima -->
+                <div class="mb-3">
+                    <label for="receiver" class="form-label">Email Penerima:</label>
+                    <input type="email" id="receiver" name="receiver" class="form-control" placeholder="Email Penerima" required>
+                    <div id="receiverError" class="text-danger" style="display:none;">Format email penerima tidak valid.</div>
+                </div>
+
+                <!-- Email CC (Opsional) -->
+                <div class="mb-3" id="ccContainer">
+                    <label for="cc" class="form-label">Email CC (Opsional):</label>
+                    <div class="input-group mb-2">
+                        <input type="email" name="cc[]" class="form-control" placeholder="Email CC" />
+                        <button type="button" class="btn btn-outline-secondary" id="addCCButton">+</button>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary">Kirim Email</button>
+            </form>
+        </div>
+
+        <!-- Status Container -->
+        <div class="status-container">
+            <h1>Status Pengiriman Email:</h1>
+            <ul id="statusList" class="list-group">
+                <!-- Status email akan ditampilkan di sini -->
+            </ul>
+        </div>
+
+
+    <script src="/static/script.js"></script>  <!-- Link ke script.js -->
+</body>
+</html>
