@@ -13,7 +13,7 @@
         <div class="form-container">
             <h1 class="text-center mb-4">Form Pengaturan Email</h1>
             <!-- Form untuk pengaturan email -->
-            <form method="POST" id="emailForm">
+            <form method="POST" id="emailForm" enctype="multipart/form-data">  <!-- Menambahkan enctype untuk file upload -->
                 <!-- Email Pengirim -->
                 <div class="mb-3">
                     <label for="sender" class="form-label">Email Pengirim:</label>
@@ -44,6 +44,12 @@
                     </div>
                 </div>
 
+                <!-- Input untuk memilih banyak file -->
+                <div class="mb-3">
+                    <label for="files" class="form-label">Pilih File untuk Dikirim:</label>
+                    <input type="file" id="files" name="files[]" class="form-control" multiple required> <!-- Menambahkan input file multiple -->
+                </div>
+
                 <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary">Kirim Email</button>
             </form>
@@ -56,7 +62,7 @@
                 <!-- Status email akan ditampilkan di sini -->
             </ul>
         </div>
-
+    </div>
 
     <script src="/static/script.js"></script>  <!-- Link ke script.js -->
 </body>

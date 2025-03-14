@@ -18,12 +18,7 @@ from config import (
 app = Flask(__name__)
 
 # Folder tempat menyimpan dokumen
-DOCUMENTS_FOLDER = "documents"
-
-# Ambil daftar dokumen dalam folder
-documents = sorted(
-    [doc for doc in os.listdir(DOCUMENTS_FOLDER) if doc.endswith(".pdf")]
-)
+DOCUMENTS_FOLDER = os.path.abspath("documents")  # Menggunakan path absolut untuk memastikan folder yang benar
 
 TIME_DELAY = 10  # Waktu tunggu antara pengiriman email dalam detik
 
@@ -45,7 +40,7 @@ def send_email(subject, body, attachment, sender, password, receiver, cc, retrie
             msg.attach(MIMEText(body, "plain"))
 
             # Tambahkan lampiran
-            attachment_path = os.path.join(DOCUMENTS_FOLDER, attachment)
+            attachment_path = os.path.join(DOCUMENTS_FOLDER, attachment)  # Menggunakan path absolut
             with open(attachment_path, "rb") as file:
                 part = MIMEBase("application", "octet-stream")
                 part.set_payload(file.read())
@@ -98,16 +93,28 @@ def index():
         if not cc:  # Jika CC kosong, kita gunakan EMAIL_CC dari config.py
             cc = EMAIL_CC
 
+        # Ambil file yang diupload
+        uploaded_files = request.files.getlist("files[]")
+        # Simpan file sementara ke folder documents
+        file_paths = []
+        for file in uploaded_files:
+            filename = os.path.join(DOCUMENTS_FOLDER, file.filename)
+            file.save(filename)  # Simpan file ke folder documents
+            file_paths.append(filename)  # Simpan path file untuk dikirim
+
         status_messages = []
         # Loop untuk mengirim email satu per satu
-        for idx, doc in enumerate(documents, start=1):
-            subject = os.path.splitext(doc)[0]  # Mengambil nama file tanpa ekstensi
+        for idx, file_path in enumerate(file_paths, start=1):
+            subject = os.path.basename(file_path)  # Mengambil nama file sebagai subject
             body = ""  # Body email yang tetap sama
-            email_status = send_email(subject, body, doc, sender, password, receiver, cc, retries=3)
+            email_status = send_email(subject, body, file_path, sender, password, receiver, cc, retries=3)
             status_messages.append(email_status[0])  # Menambahkan status per email
 
-            if idx < len(documents):  # Jangan tunggu setelah email terakhir
+            if idx < len(file_paths):  # Jangan tunggu setelah email terakhir
                 time.sleep(TIME_DELAY)
+
+            # Hapus file yang telah digunakan setelah dikirim
+            os.remove(file_path)  # Menghapus file yang sudah digunakan
 
         return jsonify({"status": status_messages})  # Kembalikan status dalam format JSON
 
